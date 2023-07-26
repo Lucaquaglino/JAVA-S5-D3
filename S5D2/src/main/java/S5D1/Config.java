@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import S5D1.entities.AnanasDecorator;
 import S5D1.entities.Bevande;
@@ -72,13 +73,15 @@ public class Config {
 		return new Tavolo(2, 5, true);
 	}
 
+	@Scope("prototype")
 	@Bean("ordine1")
 	Ordine ordine1() {
-		return Ordine.builder().numeroOrdine(1).stato(StatoOrdine.IN_CORSO).numeroCoperti(4)
+		return Ordine.builder().numeroOrdine(5).stato(StatoOrdine.IN_CORSO).numeroCoperti(4)
 				.elementiMenu(new ArrayList<>(List.of(pizzaMargheritaOrdine(), wineOrdine()))).tavolo(tavolo1())
 				.build();
 	}
 
+	@Scope("prototype")
 	@Bean("ordine2")
 	Ordine ordine2() {
 		return Ordine.builder().numeroOrdine(2).stato(StatoOrdine.IN_CORSO).numeroCoperti(5)
